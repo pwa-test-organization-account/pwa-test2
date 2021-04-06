@@ -129,12 +129,12 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
 function onPushConsole(text) {
     const console = document.querySelector('#push-console');
     var content = console.textContent;
-    console.textContent = content + "<br>\n" + text;
+    console.textContent = content + "\n" + text;
 }
 function onJsonConsole(text) {
     const console = document.querySelector('#json-console');
     var content = console.textContent;
-    console.textContent = content + "<br>\n" + text;
+    console.textContent = content + "\n" + text;
 }
 
 
