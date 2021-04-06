@@ -50,11 +50,10 @@ function initialiseUI() {
   .then(function(subscription) {
     isSubscribed = !(subscription === null);
 
-    const console = document.querySelector('#push-console');
     if (isSubscribed) {
-      console.textContent = 'User IS subscribed.';
+      onPushConsole('User IS subscribed.');
     } else {
-      console.textContent = 'User is NOT subscribed.';
+      onPushConsole('User is NOT subscribed.');
     }
 
   });
@@ -66,34 +65,34 @@ function subscribeUser() {
     applicationServerKey: applicationServerKey
   })
   .then(function(subscription) {
-    console.log('User is subscribed:', subscription);
-
+    onPushConsole('User is subscribed:', subscription);
+    onJsonConsole(JSON.stringify(subscription));
 
     isSubscribed = true;
 
   })
   .catch(function(err) {
-    console.log('Failed to subscribe the user: ', err);
+    onPushConsole('Failed to subscribe the user: ', err);
   });
 }
 
 if ('serviceWorker' in navigator && 'PushManager' in window) {
-  console.log('Service Worker and Push is supported');
+  onPushConsole('Service Worker and Push is supported');
 
   navigator.serviceWorker.register('service_worker.js')
   .then(function(swReg) {
-    console.log('Service Worker is registered', swReg);
+    onPushConsole('Service Worker is registered', swReg);
 
     swRegistration = swReg;
     swRegistration.onupdatefound = function() {
-      console.log('アップデートがあります！');
+      onPushConsole('アップデートがあります！');
       swRegistration.update();
     }
 
 
     navigator.serviceWorker.register('service_worker.js')
     .then(function(swReg) {
-      console.log('Service Worker is registered', swReg);
+      onPushConsole('Service Worker is registered', swReg);
 
       swRegistration = swReg;
       initialiseUI();
@@ -104,7 +103,8 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
       applicationServerKey: applicationServerKey
     })
     .then(function(subscription) {
-      console.log('User is subscribed:', JSON.stringify(subscription));
+      onPushConsole('User is subscribed:', JSON.stringify(subscription));
+      onJsonConsole(JSON.stringify(subscription));
 
 
       isSubscribed = true;
@@ -112,7 +112,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
 
     })
     .catch(function(err) {
-      console.log('Failed to subscribe the user: ', err);
+      onPushConsole('Failed to subscribe the user: ', err);
     });
 
 
@@ -125,3 +125,16 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
   console.warn('Push messaging is not supported');
   pushButton.textContent = 'Push Not Supported';
 }
+
+function onPushConsole(text) {
+    const console = document.querySelector('#push-console');
+    var content = console.textContent;
+    console.textContent = content + "<br>\n" + text;
+}
+function onJsonConsole(text) {
+    const console = document.querySelector('#json-console');
+    var content = console.textContent;
+    console.textContent = content + "<br>\n" + text;
+}
+
+
