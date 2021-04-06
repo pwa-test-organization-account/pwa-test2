@@ -52,9 +52,9 @@ function initialiseUI() {
 
 
     if (isSubscribed) {
-      console.log('User IS subscribed.');
+      document.getElementById('push-console').innerHTML('User IS subscribed.');
     } else {
-      console.log('User is NOT subscribed.');
+      document.getElementById('push-console').innerHTMLUser is NOT subscribed.');
     }
 
   });
