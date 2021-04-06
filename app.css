@@ -52,3 +52,6 @@ html {
   font-size: 20px;
   font-weight: bold;
 }
+pre {
+  max-width: 400px;
+}
