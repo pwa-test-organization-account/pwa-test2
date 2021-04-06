@@ -54,7 +54,7 @@ function initialiseUI() {
     if (isSubscribed) {
       document.getElementById('push-console').innerHTML('User IS subscribed.');
     } else {
-      document.getElementById('push-console').innerHTMLUser is NOT subscribed.');
+      document.getElementById('push-console').innerHTML('User is NOT subscribed.');
     }
 
   });
