@@ -50,11 +50,11 @@ function initialiseUI() {
   .then(function(subscription) {
     isSubscribed = !(subscription === null);
 
-
+    const console = document.querySelector('#push-console');
     if (isSubscribed) {
-      document.getElementById('push-console').innerHTML('User IS subscribed.');
+      console.textContent = 'User IS subscribed.';
     } else {
-      document.getElementById('push-console').innerHTML('User is NOT subscribed.');
+      console.textContent = 'User is NOT subscribed.';
     }
 
   });
